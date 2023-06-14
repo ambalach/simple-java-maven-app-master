@@ -1,9 +1,22 @@
 pipeline {
     agent any
     stages {
+        stage("Clean Up"){
+            steps {
+                deleteDir()
+            }
+        }
+        stage("Clone Repo"){
+            steps {
+                sh "git clone https://github.com/ambalach/simple-java-maven-app-master.git"
+            }
+        }        
         stage('Build') {
             steps {
+                dir("simple-java-maven-app") {
+                sh "sed -i 's/3.8.6/3.6.3/g' pom.xml"
                 sh 'mvn -B -DskipTests clean package'
+                }
             }
         }
         stage('Test') {

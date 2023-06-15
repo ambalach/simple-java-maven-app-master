@@ -22,11 +22,6 @@ pipeline {
                 sh "chmod +x -R ${env.WORKSPACE}"
                 sh './jenkins/scripts/deliver.sh'
             }
-        }
-        stage('Complete') {
-            steps {
-                echo 'Job Complete!'
-            }
-            }        
+        }   
     }
 }
